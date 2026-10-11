@@ -1,3 +1,6 @@
+Failed to create stream fd: Operation not permitted
+Failed to create stream fd: Operation not permitted
+Failed to create stream fd: Operation not permitted
 # Recog-RS
 
 Standalone Rust migration of Rapid7 Recog. The target repository is
@@ -13,7 +16,7 @@ path dependency, runtime file access, or Lattice permission inherited from
 
 - Compatibility: `NOT_VERIFIED`
 - Production admission: `DENY`
-- Implementation: migration plan prepared; implementation has not started.
+- Implementation: source inventory and standalone repository bootstrap are in progress.
 
 The migration covers the fingerprint corpus, matching and verification
 semantics, the inventoried Ruby API, and all five Ruby CLI tools. No API or CLI
