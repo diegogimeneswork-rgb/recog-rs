@@ -1,13 +1,11 @@
-Failed to create stream fd: Operation not permitted
-Failed to create stream fd: Operation not permitted
-Failed to create stream fd: Operation not permitted
 # Recog-RS Migration Context
 
 ## Objective
 
 Complete the Recog Ruby-to-Rust migration in this standalone repository while
 keeping the MyCommander reference worktree unchanged. The public API, all five
-Ruby CLI tools, and the full fingerprint corpus remain in scope.
+Ruby CLI tools, and the full fingerprint corpus remain in scope. The public
+corpus includes `http_cookies.xml` as static fingerprint data.
 
 ## Approved decisions
 
@@ -30,9 +28,11 @@ Ruby CLI tools, and the full fingerprint corpus remain in scope.
 - The approved design and implementation plan are in `docs/superpowers/`.
 - The local source worktree has user modifications. Keep it read-only and copy
   only enumerated inputs after reviewing provenance and licenses.
-- The public remote's administrative security settings are not writable through
-  the currently available GitHub integration. Add auditable repository config
-  and report server-side settings that could not be changed.
+- The repository now has read-only CI, SHA-pinned checkout, Dependabot updates,
+  and vulnerability-reporting guidance. `docs/repository-security.md` records
+  the GitHub-side branch and security controls. The available integration
+  exposes no settings-write operation; branch protection reads are denied and
+  `gh` is not authenticated, so the server-side state remains unverified.
 - The Ruby OCI oracle is not admitted. Do not execute it.
 
 ## Governing documents

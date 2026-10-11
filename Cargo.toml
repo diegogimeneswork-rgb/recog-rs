@@ -1,0 +1,16 @@
+[package]
+name = "recog-rs"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+description = "Standalone Rust migration of Rapid7 Recog"
+license = "MIT"
+repository = "https://github.com/diegogimeneswork-rgb/recog-rs"
+readme = "README.md"
+
+[lib]
+name = "recog_rs"
+path = "src/lib.rs"
+
+[lints.rust]
+unsafe_code = "forbid"

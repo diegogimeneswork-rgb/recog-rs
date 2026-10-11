@@ -1,6 +1,3 @@
-Failed to create stream fd: Operation not permitted
-Failed to create stream fd: Operation not permitted
-Failed to create stream fd: Operation not permitted
 # Recog-RS
 
 Standalone Rust migration of Rapid7 Recog. The target repository is
@@ -16,12 +13,14 @@ path dependency, runtime file access, or Lattice permission inherited from
 
 - Compatibility: `NOT_VERIFIED`
 - Production admission: `DENY`
-- Implementation: source inventory and standalone repository bootstrap are in progress.
+- Implementation: the corpus, standalone crate, and CI baseline are in place; the Ruby behavior port has not started.
 
-The migration covers the fingerprint corpus, matching and verification
-semantics, the inventoried Ruby API, and all five Ruby CLI tools. No API or CLI
-exclusions are approved. Lattice gates report evidence and release state; they
-do not grant runtime or production authority.
+The imported corpus contains 51 XML files and 4,677 fingerprint definitions,
+including `http_cookies.xml`, a static database of cookie fingerprints.
+Matching and verification semantics, the inventoried Ruby API, and all five
+Ruby CLI tools remain in scope. No API or CLI exclusions are approved. Lattice
+gates report evidence and release state; they do not grant runtime or
+production authority.
 
 See [`docs/superpowers/specs/2026-10-11-recog-rs-standalone-design.md`](docs/superpowers/specs/2026-10-11-recog-rs-standalone-design.md)
 and [`docs/superpowers/plans/2026-10-11-recog-rs-standalone-port.md`](docs/superpowers/plans/2026-10-11-recog-rs-standalone-port.md).

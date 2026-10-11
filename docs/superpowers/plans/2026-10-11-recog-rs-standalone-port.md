@@ -32,25 +32,27 @@ Current production admission: `DENY`
 - `src/regex.rs`, `src/engine.rs`, `src/verify.rs`, `src/nizer_best.rs`: bounded pattern adapter and match/verify/lifecycle services.
 - `src/bin/`: the five inventoried Recog command-line entry points, each a thin adapter.
 - `tests/`: reader, matcher, API, CLI, resource, and security contracts.
-- `vendor/recog/`: copied XML fingerprint corpus plus a provenance/license manifest; never executable runtime instructions.
+- `vendor/recog/`: copied XML fingerprint corpus and upstream license text; never executable runtime instructions.
+- `vendor/PROVENANCE.md` and `harness/source-manifest.json`: source hashes, licenses, and immutable import inventory.
 - `compat/`: versioned public API, CLI, fingerprint, pattern-feature, and divergence matrices.
 - `harness/`: bounded offline differential runners, fixed fixtures, and fail-closed evidence validation.
 - `.lattice/`: standalone verification config and read-only evidence gates.
-- `.github/workflows/`, `.github/dependabot.yml`, `SECURITY.md`: least-privilege CI, dependency updates, and vulnerability reporting guidance.
+- `.github/workflows/`, `.github/dependabot.yml`, `SECURITY.md`, `docs/repository-security.md`: least-privilege CI, dependency updates, vulnerability reporting, and remote settings guidance.
 - `README.md`, `docs/`: user-facing status, architecture, usage, and migration decisions.
 
 ## Implementation tasks
 
-### 1. Bind and import the source baseline
+### 1. Bind the source baseline and import the licensed corpus
 
 **Commit:** `docs: record Recog source provenance and standalone layout`
 
 1. Add `harness/test_source_manifest.py` first. Require a manifest row for every copied file, with source path/revision, SHA-256, license, destination, and immutable status; reject an unlisted file, changed source digest, or a path outside the reviewed source roots.
 2. Run `python3 -m unittest harness.test_source_manifest -v` and confirm the empty/incomplete manifest fails.
 3. Inventory current remote `main`, local worktree HEAD/status, candidate files, XML corpus, harness inputs, license files, and existing exact counts. Record that earlier receipts may be stale because the reference worktree contains modifications.
-4. Copy the reviewed candidate, corpus, fixtures, and harness files into this repository without moving or changing their source. Do not copy MyCommander-specific runtime, allowlist, credential, or deployment configuration.
-5. Record source hashes and upstream license notices in `vendor/recog/PROVENANCE.md` and `harness/source-manifest.json`; do not accept historical pass counts as new evidence.
-6. Run `python3 -m unittest harness.test_source_manifest -v` and inspect `git diff --check`. Commit only the manifest, provenance, and enumerated imported files.
+4. Copy the reviewed XML corpus and upstream license files into `vendor/recog/` without moving or changing their source. Do not copy MyCommander-specific runtime, allowlist, credential, or deployment configuration.
+5. Record source hashes and upstream license notices in `vendor/PROVENANCE.md` and `harness/source-manifest.json`; do not accept historical pass counts as new evidence.
+6. Keep the candidate crate, API/CLI inventories, fixtures, and harnesses as read-only inputs until each file is separately reviewed and included in a later implementation stage.
+7. Run `python3 -m unittest harness.test_source_manifest -v` and inspect `git diff --check`. Commit only the manifest, provenance, and enumerated corpus files.
 
 ### 2. Establish the standalone crate and repository CI baseline
 
